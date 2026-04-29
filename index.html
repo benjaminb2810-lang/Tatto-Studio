@@ -582,6 +582,51 @@ nav {
   text-transform: uppercase;
 }
 
+/* ── DESIGN IDEEN ── */
+.ideas-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.2rem;
+  margin-top: 3rem;
+}
+
+.idea-card {
+  background-color: #f8f7f3;
+  border: 1px solid rgba(192,57,43,0.25);
+  color: #111;
+  overflow: hidden;
+  position: relative;
+}
+
+.idea-card img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  display: block;
+}
+
+.idea-caption {
+  padding: 1.2rem 1.4rem 1.4rem;
+  background: #111;
+  border-top: 1px solid rgba(192,57,43,0.25);
+}
+
+.idea-caption h3 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.25rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #f0ede8;
+  margin-bottom: 0.35rem;
+}
+
+.idea-caption p {
+  color: #888;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  font-weight: 300;
+}
+
 /* ── SOCIAL MEDIA ── */
 .social-grid {
   display: grid;
@@ -989,6 +1034,7 @@ footer {
 
   .gallery-grid { grid-template-columns: repeat(2, 1fr); }
   .g-item.tall  { grid-row: span 1; aspect-ratio: 1; }
+  .ideas-grid   { grid-template-columns: 1fr; }
   .social-grid  { grid-template-columns: 1fr; gap: 2.5rem; }
   .social-card  { min-height: 340px; }
 
@@ -1022,6 +1068,7 @@ footer {
     <li><a href="#ueber-uns">Studio</a></li>
     <li><a href="#leistungen">Leistungen</a></li>
     <li><a href="#galerie">Galerie</a></li>
+    <li><a href="#design-ideen">Design Ideen</a></li>
     <li><a href="#social">Social Media</a></li>
     <li><a href="#rezensionen">Reviews</a></li>
     <li><a href="#info">Öffnungszeiten</a></li>
@@ -1036,6 +1083,7 @@ footer {
   <a href="#ueber-uns"   onclick="closeMenu()">Studio</a>
   <a href="#leistungen"  onclick="closeMenu()">Leistungen</a>
   <a href="#galerie"     onclick="closeMenu()">Galerie</a>
+  <a href="#design-ideen" onclick="closeMenu()">Design Ideen</a>
   <a href="#social"      onclick="closeMenu()">Social Media</a>
   <a href="#rezensionen" onclick="closeMenu()">Reviews</a>
   <a href="#info"        onclick="closeMenu()">Öffnungszeiten</a>
@@ -1179,6 +1227,32 @@ footer {
       <div class="g-item"><img src="assets/images/butterfly-neck-tattoo.jpeg" alt="Schmetterling-Tattoo am Hals mit Ornamenten" loading="lazy"><div class="g-overlay">+</div></div>
       <div class="g-item"><img src="assets/images/tom-jerry-tattoo.jpeg" alt="Farbiges Tom und Jerry Tattoo" loading="lazy"><div class="g-overlay">+</div></div>
       <div class="g-item"><img src="assets/images/script-tattoo.jpeg" alt="Schriftzug-Tattoo mit englischem Zitat" loading="lazy"><div class="g-overlay">+</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- DESIGN IDEEN -->
+
+<section id="design-ideen" class="sec sec-black">
+  <div class="container">
+    <p class="sec-label reveal">Inspiration</p>
+    <h2 class="sec-title reveal">TATTOO DESIGN IDEEN</h2>
+    <p class="gallery-note reveal">Feine Linien, florale Details und Initialen als Inspiration für kleine individuelle Motive.</p>
+    <div class="ideas-grid reveal">
+      <article class="idea-card">
+        <img src="assets/images/design-ideas-floral-sheet.png" alt="Fineline Tattoo Design Ideen mit Blumen, Schmetterlingen, Mond und kleinen Motiven" loading="lazy">
+        <div class="idea-caption">
+          <h3>Florale Fineline Ideen</h3>
+          <p>Kleine Motive, Blüten, Schmetterlinge und zarte Ornamente als Vorlage für dezente Tattoos.</p>
+        </div>
+      </article>
+      <article class="idea-card">
+        <img src="assets/images/design-ideas-lettering-sheet.png" alt="Fineline Initialen und Buchstaben mit floralen Tattoo Details" loading="lazy">
+        <div class="idea-caption">
+          <h3>Initialen & Buchstaben</h3>
+          <p>Verspielte Lettering-Ideen mit floralen Akzenten für persönliche Initialen und Namen.</p>
+        </div>
+      </article>
     </div>
   </div>
 </section>
