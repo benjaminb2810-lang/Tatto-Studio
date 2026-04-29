@@ -1546,8 +1546,21 @@ footer {
     lightboxImg.src = '';
   }
 
-  document.querySelectorAll('#galerie .g-item img').forEach((img) => {
-    img.addEventListener('click', () => openLightbox(img));
+  document.querySelectorAll('#galerie .g-item').forEach((item) => {
+    item.setAttribute('tabindex', '0');
+    item.setAttribute('role', 'button');
+    item.setAttribute('aria-label', 'Bild vergrößert anzeigen');
+    item.addEventListener('click', () => {
+      const img = item.querySelector('img');
+      if (img) openLightbox(img);
+    });
+    item.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        const img = item.querySelector('img');
+        if (img) openLightbox(img);
+      }
+    });
   });
 
   lightboxClose.addEventListener('click', closeLightbox);
