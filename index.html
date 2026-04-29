@@ -698,19 +698,29 @@ nav {
 .map-placeholder {
   background-color: #1c1c1c;
   border: 1px solid rgba(192,57,43,0.2);
-  height: 260px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
+  min-height: 320px;
+  overflow: hidden;
+  position: relative;
 }
-.map-placeholder span {
+.map-placeholder iframe {
+  width: 100%;
+  height: 320px;
+  border: 0;
+  display: block;
+  filter: grayscale(1) invert(0.9) contrast(0.9);
+}
+.map-link {
+  display: inline-flex;
+  margin-top: 1rem;
   font-family: 'Barlow Condensed', sans-serif;
-  font-size: 0.78rem;
+  font-size: 0.82rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: rgba(240,237,232,0.2);
+  color: #e74c3c;
+  text-decoration: none;
+}
+.map-link:hover {
+  color: #fff;
 }
 
 /* ── KONTAKT ── */
@@ -1177,9 +1187,15 @@ footer {
       </div>
       <div class="reveal">
         <div class="map-placeholder">
-          <span style="font-size:1.5rem;">🗺️</span>
-          <span>Google Maps hier einbetten</span>
+          <iframe
+            title="Google Maps Standort Bodyart by Arafat"
+            src="https://www.google.com/maps?q=Viehmarktstra%C3%9Fe%203%2C%2082256%20F%C3%BCrstenfeldbruck&output=embed"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen>
+          </iframe>
         </div>
+        <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Viehmarktstra%C3%9Fe%203%2C%2082256%20F%C3%BCrstenfeldbruck" target="_blank" rel="noopener">Route in Google Maps öffnen →</a>
       </div>
     </div>
   </div>
