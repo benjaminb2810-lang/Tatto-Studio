@@ -470,6 +470,11 @@ nav {
   position: relative;
   overflow: hidden;
   transition: background-color 0.3s;
+  cursor: pointer;
+}
+.service-card:focus-visible {
+  outline: 2px solid #e74c3c;
+  outline-offset: -6px;
 }
 .service-card:nth-child(even)      { border-right: none; }
 .service-card:nth-last-child(-n+2) { border-bottom: none; }
@@ -620,6 +625,87 @@ nav {
 .lightbox-close:hover {
   background-color: #e74c3c;
   transform: translateY(-2px);
+}
+
+.service-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 520;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 5rem 1.5rem 2rem;
+  background-color: rgba(0,0,0,0.9);
+}
+.service-modal.open { display: flex; }
+.service-dialog {
+  width: min(720px, 100%);
+  max-height: 82vh;
+  overflow-y: auto;
+  background-color: #111;
+  border: 1px solid rgba(192,57,43,0.35);
+  box-shadow: 0 24px 80px rgba(0,0,0,0.65);
+  padding: 2.2rem;
+  position: relative;
+}
+.service-modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(240,237,232,0.22);
+  background-color: #c0392b;
+  color: #fff;
+  font-size: 1.8rem;
+  line-height: 1;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+}
+.service-modal-close:hover { background-color: #e74c3c; }
+.service-modal-kicker {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #c0392b;
+  margin-bottom: 0.5rem;
+}
+.service-modal-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  letter-spacing: 0.04em;
+  color: #f0ede8;
+  margin-bottom: 1rem;
+  padding-right: 3rem;
+}
+.service-modal-text {
+  color: #bbb;
+  font-size: 1rem;
+  line-height: 1.75;
+  font-weight: 300;
+  margin-bottom: 1.2rem;
+}
+.service-modal-list {
+  display: grid;
+  gap: 0.8rem;
+  margin: 1.2rem 0 1.5rem;
+  color: #bbb;
+  line-height: 1.6;
+  list-style: none;
+}
+.service-modal-list li {
+  border-left: 2px solid #c0392b;
+  padding-left: 0.9rem;
+}
+.service-modal-note {
+  border: 1px solid rgba(192,57,43,0.25);
+  background-color: rgba(192,57,43,0.08);
+  padding: 1rem;
+  color: #bbb;
+  line-height: 1.6;
+  font-size: 0.92rem;
 }
 
 /* ── DESIGN IDEEN ── */
@@ -1224,25 +1310,25 @@ footer {
     <p class="sec-label reveal">Was wir machen</p>
     <h2 class="sec-title reveal">LEISTUNGEN</h2>
     <div class="services-grid reveal">
-      <div class="service-card">
+      <div class="service-card" data-service="tattoo">
         <div class="service-num">01</div>
         <h3 class="service-name">Custom Tattoo</h3>
         <p class="service-desc">Einzigartige, maßgeschneiderte Tattoos nach deinen Wünschen – von der ersten Skizze bis zum fertigen Kunstwerk. Kein Motiv ist zu komplex.</p>
         <span class="service-arrow">→</span>
       </div>
-      <div class="service-card">
+      <div class="service-card" data-service="piercing">
         <div class="service-num">02</div>
         <h3 class="service-name">Piercing</h3>
         <p class="service-desc">Professionelles Piercing mit sterilem Equipment und hochwertigen Materialien. Ohren, Nase, Lippe, Nabel und vieles mehr – sicher und hygienisch.</p>
         <span class="service-arrow">→</span>
       </div>
-      <div class="service-card">
+      <div class="service-card" data-service="coverup">
         <div class="service-num">03</div>
         <h3 class="service-name">Cover-Up</h3>
         <p class="service-desc">Altes Tattoo, das dir nicht mehr gefällt? Wir überarbeiten es und verwandeln es in ein neues Kunstwerk, das du wieder liebst.</p>
         <span class="service-arrow">→</span>
       </div>
-      <div class="service-card">
+      <div class="service-card" data-service="design">
         <div class="service-num">04</div>
         <h3 class="service-name">Beratung & Design</h3>
         <p class="service-desc">Ausführliche Beratung ist für uns selbstverständlich. Wir erarbeiten gemeinsam Motiv, Stil, Größe und Platzierung – bis du 100% zufrieden bist.</p>
@@ -1510,6 +1596,17 @@ footer {
   <img id="lightboxImg" src="" alt="">
 </div>
 
+<div class="service-modal" id="serviceModal" aria-hidden="true">
+  <div class="service-dialog" role="dialog" aria-modal="true" aria-labelledby="serviceModalTitle">
+    <button class="service-modal-close" type="button" id="serviceModalClose" aria-label="Infofenster schließen">×</button>
+    <p class="service-modal-kicker" id="serviceModalKicker">Leistung</p>
+    <h3 class="service-modal-title" id="serviceModalTitle"></h3>
+    <p class="service-modal-text" id="serviceModalText"></p>
+    <ul class="service-modal-list" id="serviceModalList"></ul>
+    <p class="service-modal-note" id="serviceModalNote"></p>
+  </div>
+</div>
+
 <script>
   const hamburger = document.getElementById('hamburger');
   const mobileMenu = document.getElementById('mobileMenu');
@@ -1569,6 +1666,101 @@ footer {
   });
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && lightbox.classList.contains('open')) closeLightbox();
+  });
+
+  const serviceInfo = {
+    tattoo: {
+      kicker: '01 · Custom Tattoo',
+      title: 'Custom Tattoo',
+      text: 'Ein Custom Tattoo wird individuell für Motiv, Körperstelle, Größe und Stil geplant. Wichtig sind eine saubere Arbeitsweise, sterile Materialien und realistische Erwartungen an Details, Heilung und Pflege.',
+      items: [
+        'Tattoo-Farbe wird mit Nadeln in die obere Hautschicht eingebracht; dadurch wird die Haut verletzt und muss danach sauber heilen.',
+        'Mögliche Risiken sind Hautinfektionen, allergische Reaktionen auf Pigmente und Reizungen, besonders wenn Pflege oder Hygiene nicht stimmen.',
+        'Nach dem Stechen sollte das Tattoo sauber gehalten, vorsichtig gewaschen, mit geeigneter Pflege versorgt und vor Sonne geschützt werden.'
+      ],
+      note: 'Hinweis: Bei starken Schmerzen, Eiter, Fieber, zunehmender Rötung oder allergischen Reaktionen sollte medizinischer Rat eingeholt werden.'
+    },
+    piercing: {
+      kicker: '02 · Piercing',
+      title: 'Piercing',
+      text: 'Beim Piercing wird Gewebe kontrolliert durchstochen und mit passendem Schmuck offengehalten. Die richtige Schmuckgröße, sterile Arbeitsweise und konsequente Nachpflege sind entscheidend für eine gute Heilung.',
+      items: [
+        'Frische Piercings sollten möglichst wenig berührt und nur mit sauberen Händen gepflegt werden.',
+        'Typische Warnzeichen für eine Infektion sind zunehmende Rötung, Schwellung, Wärme, pochender Schmerz oder austretender Eiter.',
+        'Heilzeiten unterscheiden sich je nach Körperstelle deutlich; Knorpelbereiche brauchen oft länger als weiches Gewebe.'
+      ],
+      note: 'Hinweis: Schmuck bei Verdacht auf Infektion nicht eigenmächtig entfernen, sondern professionellen oder medizinischen Rat einholen.'
+    },
+    coverup: {
+      kicker: '03 · Cover-Up',
+      title: 'Cover-Up',
+      text: 'Ein Cover-Up überdeckt oder integriert ein altes Tattoo durch ein neues Motiv. Es funktioniert am besten, wenn Größe, Dunkelheit, Linienführung und Platzierung des alten Tattoos ehrlich berücksichtigt werden.',
+      items: [
+        'Cover-Ups müssen oft größer und dunkler geplant werden als das alte Tattoo, weil helle Farbe dunkle Linien nicht zuverlässig verdeckt.',
+        'Starke Schatten, Blackwork, Blätter, Tiere, Ornamente oder strukturreiche Motive eignen sich häufig besser als sehr helle Fineline-Motive.',
+        'Bei sehr dunklen oder großen alten Tattoos kann vorheriges Aufhellen per Laser mehr Gestaltungsspielraum schaffen.'
+      ],
+      note: 'Hinweis: Gute Cover-Ups leben von realistischen Erwartungen. Nicht jedes Wunschmotiv kann jedes alte Tattoo sauber verdecken.'
+    },
+    design: {
+      kicker: '04 · Beratung & Design',
+      title: 'Beratung & Design',
+      text: 'In der Beratung wird aus einer Idee ein Tattoo, das zur Hautstelle, zum Stil und zum Alltag passt. Dabei werden Motiv, Größe, Platzierung, Details, Budget und mögliche Anpassungen besprochen.',
+      items: [
+        'Hilfreich sind Referenzbilder, gewünschte Stilrichtung, ungefähre Größe und die Körperstelle.',
+        'Sehr kleine Motive brauchen klare Linien und weniger Details, damit sie langfristig lesbar bleiben.',
+        'Bei der Platzierung zählen Körperform, Bewegung, Sichtbarkeit, Schmerzempfinden und ob das Motiv später erweitert werden soll.'
+      ],
+      note: 'Hinweis: Eine gute Beratung schützt vor Motiven, die auf Papier schön aussehen, auf Haut aber zu klein, zu detailreich oder ungünstig platziert wären.'
+    }
+  };
+
+  const serviceModal = document.getElementById('serviceModal');
+  const serviceModalClose = document.getElementById('serviceModalClose');
+  const serviceModalKicker = document.getElementById('serviceModalKicker');
+  const serviceModalTitle = document.getElementById('serviceModalTitle');
+  const serviceModalText = document.getElementById('serviceModalText');
+  const serviceModalList = document.getElementById('serviceModalList');
+  const serviceModalNote = document.getElementById('serviceModalNote');
+
+  function openServiceModal(key) {
+    const data = serviceInfo[key];
+    if (!data) return;
+    serviceModalKicker.textContent = data.kicker;
+    serviceModalTitle.textContent = data.title;
+    serviceModalText.textContent = data.text;
+    serviceModalList.innerHTML = data.items.map((item) => `<li>${item}</li>`).join('');
+    serviceModalNote.textContent = data.note;
+    serviceModal.classList.add('open');
+    serviceModal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeServiceModal() {
+    serviceModal.classList.remove('open');
+    serviceModal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('#leistungen .service-card').forEach((card) => {
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('role', 'button');
+    card.setAttribute('aria-label', `${card.querySelector('.service-name').textContent} Informationen öffnen`);
+    card.addEventListener('click', () => openServiceModal(card.dataset.service));
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openServiceModal(card.dataset.service);
+      }
+    });
+  });
+
+  serviceModalClose.addEventListener('click', closeServiceModal);
+  serviceModal.addEventListener('click', (e) => {
+    if (e.target === serviceModal) closeServiceModal();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && serviceModal.classList.contains('open')) closeServiceModal();
   });
 
   document.getElementById('contactForm').addEventListener('submit', function(e) {
