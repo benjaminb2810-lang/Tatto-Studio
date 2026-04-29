@@ -12,7 +12,6 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-```
 :root {
   --black:      #080808;
   --dark:       #111111;
@@ -404,6 +403,13 @@ nav {
   height: 3px;
   background: linear-gradient(90deg, #c0392b, transparent);
 }
+.about-img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: grayscale(0.2) contrast(1.05);
+}
 .about-img-box svg { opacity: 0.12; }
 .about-img-hint {
   font-family: 'Barlow Condensed', sans-serif;
@@ -516,6 +522,18 @@ nav {
 .g-item.tall { grid-row: span 2; aspect-ratio: auto; }
 .g-item:hover { border-color: #c0392b; }
 .g-item:hover .g-overlay { opacity: 1; }
+
+.g-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.35s ease, filter 0.35s ease;
+}
+.g-item:hover img {
+  transform: scale(1.04);
+  filter: grayscale(0.15) contrast(1.08);
+}
 
 .g-overlay {
   position: absolute;
@@ -882,8 +900,6 @@ footer {
   .hero-title { font-size: 3.8rem; }
   .sec-title  { font-size: 2.4rem; }
 }
-```
-
   </style>
 </head>
 <body>
@@ -990,10 +1006,7 @@ footer {
       </div>
       <div class="about-img-wrap reveal">
         <div class="about-img-box">
-          <svg width="80" height="80" viewBox="0 0 80 80" fill="#f0ede8">
-            <path d="M15 65 L30 20 L42 48 L54 28 L67 65 Z"/>
-          </svg>
-          <p class="about-img-hint">Dein Foto hier einsetzen</p>
+          <img src="assets/images/dragon-tattoo.jpeg" alt="Großes Drachen-Tattoo als Studio-Arbeit von Bodyart by Arafat" loading="lazy">
         </div>
         <div class="about-badge">
           <span class="about-badge-big">100%</span>
@@ -1047,19 +1060,13 @@ footer {
     <h2 class="sec-title reveal">UNSERE ARBEITEN</h2>
     <p class="gallery-note reveal">Hier kommen deine echten Tattoo-Fotos rein – je mehr, desto besser!</p>
     <div class="gallery-grid reveal">
-      <div class="g-item tall">
-        <div class="g-ph">
-          <svg width="48" height="48" viewBox="0 0 60 60" fill="white"><rect x="4" y="4" width="52" height="52" rx="2" stroke="white" stroke-width="1.5" fill="none"/><path d="M4 40L19 24L32 36L43 25L56 40" stroke="white" stroke-width="1.5" fill="none"/><circle cx="43" cy="18" r="5" fill="none" stroke="white" stroke-width="1.5"/></svg>
-          <span>Tattoo Foto</span>
-        </div>
-        <div class="g-overlay">+</div>
-      </div>
-      <div class="g-item"><div class="g-ph"><svg width="36" height="36" viewBox="0 0 60 60"><rect x="4" y="4" width="52" height="52" stroke="white" stroke-width="1.5" fill="none"/><path d="M4 40L19 24L32 36L43 25L56 40" stroke="white" stroke-width="1.5" fill="none"/></svg><span>Foto</span></div><div class="g-overlay">+</div></div>
-      <div class="g-item"><div class="g-ph"><svg width="36" height="36" viewBox="0 0 60 60"><rect x="4" y="4" width="52" height="52" stroke="white" stroke-width="1.5" fill="none"/><path d="M4 40L19 24L32 36L43 25L56 40" stroke="white" stroke-width="1.5" fill="none"/></svg><span>Foto</span></div><div class="g-overlay">+</div></div>
-      <div class="g-item"><div class="g-ph"><svg width="36" height="36" viewBox="0 0 60 60"><rect x="4" y="4" width="52" height="52" stroke="white" stroke-width="1.5" fill="none"/><path d="M4 40L19 24L32 36L43 25L56 40" stroke="white" stroke-width="1.5" fill="none"/></svg><span>Foto</span></div><div class="g-overlay">+</div></div>
-      <div class="g-item"><div class="g-ph"><svg width="36" height="36" viewBox="0 0 60 60"><rect x="4" y="4" width="52" height="52" stroke="white" stroke-width="1.5" fill="none"/><path d="M4 40L19 24L32 36L43 25L56 40" stroke="white" stroke-width="1.5" fill="none"/></svg><span>Foto</span></div><div class="g-overlay">+</div></div>
-      <div class="g-item"><div class="g-ph"><svg width="36" height="36" viewBox="0 0 60 60"><rect x="4" y="4" width="52" height="52" stroke="white" stroke-width="1.5" fill="none"/><path d="M4 40L19 24L32 36L43 25L56 40" stroke="white" stroke-width="1.5" fill="none"/></svg><span>Foto</span></div><div class="g-overlay">+</div></div>
-      <div class="g-item"><div class="g-ph"><svg width="36" height="36" viewBox="0 0 60 60"><rect x="4" y="4" width="52" height="52" stroke="white" stroke-width="1.5" fill="none"/><path d="M4 40L19 24L32 36L43 25L56 40" stroke="white" stroke-width="1.5" fill="none"/></svg><span>Foto</span></div><div class="g-overlay">+</div></div>
+      <div class="g-item tall"><img src="assets/images/dragon-tattoo.jpeg" alt="Drachen-Tattoo mit Blüten und Totenkopf" loading="lazy"><div class="g-overlay">+</div></div>
+      <div class="g-item"><img src="assets/images/cross-tattoo.jpeg" alt="Schattiertes Kreuz-Tattoo mit Runen und Datum" loading="lazy"><div class="g-overlay">+</div></div>
+      <div class="g-item"><img src="assets/images/lioness-floral-tattoo.jpeg" alt="Feines Löwinnen-Tattoo mit floralen Details" loading="lazy"><div class="g-overlay">+</div></div>
+      <div class="g-item"><img src="assets/images/goose-floral-tattoo.jpeg" alt="Gans-Tattoo mit Blumen und feinen Linien" loading="lazy"><div class="g-overlay">+</div></div>
+      <div class="g-item"><img src="assets/images/butterfly-neck-tattoo.jpeg" alt="Schmetterling-Tattoo am Hals mit Ornamenten" loading="lazy"><div class="g-overlay">+</div></div>
+      <div class="g-item"><img src="assets/images/tom-jerry-tattoo.jpeg" alt="Farbiges Tom und Jerry Tattoo" loading="lazy"><div class="g-overlay">+</div></div>
+      <div class="g-item"><img src="assets/images/script-tattoo.jpeg" alt="Schriftzug-Tattoo mit englischem Zitat" loading="lazy"><div class="g-overlay">+</div></div>
     </div>
   </div>
 </section>
