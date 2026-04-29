@@ -8,7 +8,7 @@
   <meta name="description" content="Bodyart by Arafat – Dein Tattoo & Piercing Studio in Fürstenfeldbruck. Maßgeschneiderte Tattoos, professionelles Piercing. 85+ Bewertungen, ★ 4.6." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,500;1,400&family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,500;1,400&family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -184,18 +184,26 @@ nav {
 }
 
 .hero-title {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Anton', 'Bebas Neue', sans-serif;
   font-size: clamp(4.5rem, 13vw, 12rem);
-  line-height: 0.88;
-  letter-spacing: 0.02em;
-  color: #f0ede8;
+  line-height: 0.9;
+  letter-spacing: 0;
+  color: #fff;
+  text-transform: uppercase;
+  -webkit-text-stroke: clamp(4px, 0.75vw, 12px) #030303;
+  paint-order: stroke fill;
+  text-shadow:
+    0.04em 0.05em 0 #030303,
+    0.08em 0.1em 0 rgba(0,0,0,0.45);
+  transform: perspective(900px) rotateX(5deg) skewX(-3deg);
+  transform-origin: left center;
   animation: fadeUp 0.6s 0.1s ease both;
 }
 .hero-title .outline {
-  -webkit-text-stroke: 1px rgba(240,237,232,0.25);
-  color: transparent;
+  -webkit-text-stroke: clamp(4px, 0.75vw, 12px) #030303;
+  color: #fff;
 }
-.hero-title .red { color: #c0392b; }
+.hero-title .red { color: #fff; }
 
 .hero-bottom {
   margin-top: 2.5rem;
@@ -340,11 +348,19 @@ nav {
 }
 
 .sec-title {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Anton', 'Bebas Neue', sans-serif;
   font-size: clamp(2.8rem, 6vw, 5rem);
-  line-height: 0.95;
-  letter-spacing: 0.03em;
-  color: #f0ede8;
+  line-height: 0.98;
+  letter-spacing: 0;
+  color: #fff;
+  text-transform: uppercase;
+  -webkit-text-stroke: clamp(3px, 0.45vw, 7px) #030303;
+  paint-order: stroke fill;
+  text-shadow:
+    0.04em 0.05em 0 #030303,
+    0.07em 0.09em 0 rgba(0,0,0,0.35);
+  transform: perspective(700px) rotateX(4deg) skewX(-2deg);
+  transform-origin: left center;
   margin-bottom: 1.2rem;
 }
 
@@ -1006,7 +1022,7 @@ footer {
       </div>
       <div class="about-img-wrap reveal">
         <div class="about-img-box">
-          <img src="assets/images/dragon-tattoo.jpeg" alt="Großes Drachen-Tattoo als Studio-Arbeit von Bodyart by Arafat" loading="lazy">
+          <img src="assets/images/ibex-mountain-tattoo.jpeg" alt="Steinbock-Tattoo mit Bergmotiv und roten Akzenten" loading="lazy">
         </div>
         <div class="about-badge">
           <span class="about-badge-big">100%</span>
